@@ -1,5 +1,6 @@
+const { string } = require('joi');
 const mongoose = require('mongoose');
-const ArgumentSchema = require('./Argument')
+const Argument = require('./Argument')
 
 const ClubSchema = mongoose.Schema({
    clubName:{
@@ -19,8 +20,13 @@ const ClubSchema = mongoose.Schema({
          min: 6,
          max: 255 
       },
+      image: {
+         type: String, 
+      },
       arguments: {
-         type: ArgumentSchema 
+         type: Argument 
       }
    }
 })
+
+module.exports = mongoose.model('Club', ClubSchema)

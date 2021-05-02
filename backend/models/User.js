@@ -20,6 +20,9 @@ const UserSchema = new mongoose.Schema({
       max: 1024,
       min: 6 
    },
+   image: {
+      type: String, 
+   },
    clubs:{
       type: Array,
    },
@@ -27,3 +30,5 @@ const UserSchema = new mongoose.Schema({
       type: Array
    }
 })
+
+module.exports = mongoose.model('User', UserSchema)

@@ -5,6 +5,7 @@ const erorrHandler = require('./middlewares/error')
 const colors = require('colors')
 const userRouter = require('./routes/user')
 const morgan = require('morgan')
+const bodyParser = require('body-parser')
 
 dotenv.config({path: './config/config.env'})
 
@@ -13,6 +14,8 @@ const app = express()
 connectDB()
 
 app.use(morgan('dev'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
 
 app.use('/api/v1/user', userRouter)
 //app.use('/api/v1/clubs')

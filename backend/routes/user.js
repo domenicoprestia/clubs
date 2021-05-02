@@ -1,9 +1,12 @@
 const express = require('express');
-const { createUser } = require('../controllers/user');
+const { createUser, loginUser } = require('../controllers/user');
 
 
 const router = express.Router()
 
 router.post('/register', createUser)
+router.post('/login', loginUser)
+
+//router.put('/edit') todo
 
 module.exports = router

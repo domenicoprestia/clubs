@@ -14,4 +14,4 @@ const ArgumentSchema = mongoose.Schema({
    }
 })
 
-module.exports = ArgumentSchema
+module.exports = mongoose.model('Argument', ArgumentSchema)

@@ -4,16 +4,25 @@ exports.registerValidation = (data) => {
    const schema = Joi.object({
       username: Joi.string().min(6).required(),
       email: Joi.string().min(6).required().email(),
-      password: Joi.string().min(6).required(),
-      address: Joi.string().required()
+      password: Joi.string().min(6).required()
    })
    return schema.validate(data)
 }
 
 exports.loginValidation = (data) => {
    const schema = Joi.object({
-      username: Joi.min(6).required(),
-      password: Joi.required()
+      username: Joi.string().min(6).required(),
+      password: Joi.string().required()
    })
+   return schema.validate(data)
+}
+
+exports.editValidation = (data) => {
+   const schema = Joi.object({
+      username: Joi.string().min(6).required(),
+      email: Joi.string().min(6).required().email(),
+      password: Joi.string().min(6).required()
+   })
+
    return schema.validate(data)
 }

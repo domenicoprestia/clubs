@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv')
 const User = require('../models/User')
 const asyncHandler = require('../middlewares/async')
-const {registerValidation, loginValidation} = require('../middlewares/validation')
+const {registerValidation, loginValidation, editValidation} = require('../middlewares/validation')
 
 //@desc create a user
 //@router POST /api/v1/user/register
@@ -11,6 +11,7 @@ const {registerValidation, loginValidation} = require('../middlewares/validation
 
 
 exports.createUser = asyncHandler(async(req, res, next) => { 
+
    //register validation 
    const {error} = registerValidation(req.body)
    if(error) res.status(400).json({success: false, message: error.details[0].message})
@@ -48,3 +49,13 @@ exports.loginUser = asyncHandler(async(req,res,next) => {
    const token = jwt.sign({_id: user.id}, process.env.SECRET_TOKEN)
    res.header('auth-token', token).send(token)
 })
+
+//@desc edit a user
+//@rotuer PUT /api/v1/user/edit
+//@access private
+
+exports.editUser = asyncHandler(async(req,res,next) => {
+   const {error} = editValidation(req.body)
+   if(error) return res.status(400).send(error.details[0].message)
+})
+
