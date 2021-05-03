@@ -11,7 +11,7 @@ const {registerValidation, loginValidation, editValidation} = require('../middle
 
 
 exports.createUser = asyncHandler(async(req, res, next) => { 
-
+ 
    //register validation 
    const {error} = registerValidation(req.body)
    if(error) res.status(400).json({success: false, message: error.details[0].message})
@@ -25,8 +25,9 @@ exports.createUser = asyncHandler(async(req, res, next) => {
       const user = await User.create(req.body)
       res.status(200).json({success: true, data: user})
    }catch(err){
-      if(err.code == 1100) res.status(400).json({success: false, message:'Username or email are duplicates'})
+      if(err.code == 11000) res.status(400).json({success: false, message:'Username or email are duplicates'})
    }
+
 })
 
 //@desc login as a user

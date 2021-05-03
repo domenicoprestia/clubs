@@ -26,3 +26,13 @@ exports.editValidation = (data) => {
 
    return schema.validate(data)
 }
+
+exports.clubValidation = (data) => {
+   const schema = Joi.object({
+      clubName: Joi.string().min(6).required(),
+      topic: Joi.string().required(),
+      question: Joi.string().required()
+   })
+
+   return schema.validate(data)
+}

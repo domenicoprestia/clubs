@@ -8,7 +8,8 @@ const ClubSchema = mongoose.Schema({
          type: String,
          required: [true, "Please add a club name"],
          min: 6,
-         max: 30
+         max: 30,
+         unique: true
       },
       topic: {
          type: String, 
