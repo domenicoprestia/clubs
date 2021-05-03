@@ -1,14 +1,18 @@
-const { string } = require('joi');
 const mongoose = require('mongoose');
-const Argument = require('./Argument')
+const { default: slugify } = require('slugify');
 
 const ClubSchema = mongoose.Schema({
-   clubName:{
+   
       name: {
          type: String,
          required: [true, "Please add a club name"],
          min: 6,
          max: 30,
+         unique: true
+      },
+      slug: {
+         type: String, 
+         reuqired: [true],
          unique: true
       },
       topic: {
@@ -25,9 +29,19 @@ const ClubSchema = mongoose.Schema({
          type: String, 
       },
       arguments: {
-         type: Argument 
+         type: Object 
+      },
+      approvals: {
+         Number: Number
+      },
+      creator: {
+         type: Object,
+         required: [true, "You cant create a club without a creator"]
       }
-   }
+})
+
+ClubSchema.pre('save', function(){
+   this.slug = slugify(this.name, {lower: true})
 })
 
 module.exports = mongoose.model('Club', ClubSchema)

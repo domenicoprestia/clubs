@@ -28,6 +28,9 @@ const UserSchema = new mongoose.Schema({
    },
    savedClubs:{
       type: Array
+   },
+   savedArguments:{
+      type: Array
    }
 })
 

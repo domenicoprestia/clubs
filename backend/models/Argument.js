@@ -1,4 +1,4 @@
-const mongoose = reuqire('mongoose')
+const mongoose = require('mongoose')
 
 const ArgumentSchema = mongoose.Schema({
    username:{
@@ -9,8 +9,16 @@ const ArgumentSchema = mongoose.Schema({
       type: String, 
       required: [true, "You have to add the phrase in order to argument under a club"]
    },
-   approvations:{
-      type: BigInt
+   approvals:{
+      type: Number
+   },
+   createdAt:{
+      type: Date,
+      default: Date.now
+   },
+   clubSlug:{
+      type: String,
+      required: [true]
    }
 })
 

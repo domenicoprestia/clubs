@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 const User = require('../models/User')
 const asyncHandler = require('../middlewares/async')
 const {registerValidation, loginValidation, editValidation} = require('../middlewares/validation')
+const Club = require('../models/Club')
 
 //@desc create a user
 //@router POST /api/v1/user/register
@@ -14,7 +15,7 @@ exports.createUser = asyncHandler(async(req, res, next) => {
  
    //register validation 
    const {error} = registerValidation(req.body)
-   if(error) res.status(400).json({success: false, message: error.details[0].message})
+   if(error) return res.status(400).json({success: false, message: error.details[0].message})
 
    //hash password 
    const salt = await bcrypt.genSalt(10)
@@ -23,6 +24,8 @@ exports.createUser = asyncHandler(async(req, res, next) => {
    //create new user 
    try{
       const user = await User.create(req.body)
+      const token = jwt.sign({_id: user.id}, process.env.SECRET_TOKEN)
+      res.header('auth-token', token).send(token)
       res.status(200).json({success: true, data: user})
    }catch(err){
       if(err.code == 11000) res.status(400).json({success: false, message:'Username or email are duplicates'})
@@ -56,7 +59,42 @@ exports.loginUser = asyncHandler(async(req,res,next) => {
 //@access private
 
 exports.editUser = asyncHandler(async(req,res,next) => {
+
+
+   const user = await User.find({username: req.user.username})
+
+   if(!req.body.username) req.body.username = user[0].username
+   if(!req.body.email) req.body.email = user[0].email
+   if(!req.body.password) req.body.password = user[0].password
+   else {
+      const salt = await bcrypt.genSalt(10)
+      req.body.password = await bcrypt.hash(req.body.password, salt)}
+
    const {error} = editValidation(req.body)
+
    if(error) return res.status(400).send(error.details[0].message)
+
+   
+
+   
+   try{
+      const newUser = await User.findByIdAndUpdate(user[0]._id, req.body)
+      res.status(200).json({success: true, message: 'User modified succesfully'})
+   }catch(err){
+      if(err.code == 11000) res.status(400).json({success: false, message:'Username or email are duplicates'})
+   }
+
 })
 
+//@desc delete a user
+//@router DELETE /api/v1/user/delete
+//@access private
+
+exports.deleteUser = asyncHandler(async(req,res,next) => {
+   try{
+   await User.findByIdAndDelete(req.user._id)
+   res.status(200).json({success: true, message:'You deleted your account with success'})
+   }catch(err){
+      res.status(400).json({success: false, message: 'Something went wrong'})
+   }
+})

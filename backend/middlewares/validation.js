@@ -29,7 +29,7 @@ exports.editValidation = (data) => {
 
 exports.clubValidation = (data) => {
    const schema = Joi.object({
-      clubName: Joi.string().min(6).required(),
+      name: Joi.string().min(6).required(),
       topic: Joi.string().required(),
       question: Joi.string().required()
    })
