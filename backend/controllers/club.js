@@ -33,6 +33,7 @@ exports.approveClub = asyncHandler(async(req,res,next) => {
 })
 
 
+
 exports.argumentClub = asyncHandler(async(req,res,next) => {
 
 })
@@ -43,14 +44,32 @@ exports.approveArgument = asyncHandler(async(req,res,next) => {
 
 })
 
+
+
 exports.getAllClubs = asyncHandler(async(req,res,next) => {
+
+    const clubs = await Club.find()
+    res.status(200).json({success: true, data: clubs})
 
 })
 
 exports.getClubsOnName = asyncHandler(async(req,res,next) => {
 
+    let clubs 
+
+   if(req.params.slug) {clubs = await Club.find({slug: req.params.slug})}
+
+   if(clubs.length == 0) return res.status(400).json({success: false, message: "No clubs found with that name"})
+   else res.status(200).json({success: true, data: clubs})
+   
 })
 
-exports.getClubOnTopic = asyncHandler(async(req,res,next) => {
+exports.getClubsOnTopic = asyncHandler(async(req,res,next) => {
     
+   let clubs
+
+   if(req.params.topic) {clubs = await Club.find({topic: req.params.topic})}
+
+   if(clubs.length == 0) return res.status(400).json({success: false, message: "No clubs found with that topic"})
+   else res.status(200).json({success: true, data: clubs})
 })
