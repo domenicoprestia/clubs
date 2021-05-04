@@ -26,10 +26,10 @@ const UserSchema = new mongoose.Schema({
    clubs:{
       type: Array,
    },
-   savedClubs:{
+   approvedClubs:{
       type: Array
    },
-   savedArguments:{
+   approvedArguments:{
       type: Array
    }
 })
