@@ -51,6 +51,6 @@ exports.getClubsOnName = asyncHandler(async(req,res,next) => {
 
 })
 
-exports.getClubOnTopic = asyncHandler(async(req,res,next) => {
+exports.getClubsOnTopic = asyncHandler(async(req,res,next) => {
     
 })
