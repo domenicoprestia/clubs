@@ -7,7 +7,7 @@ const router = express.Router()
 router.post('/create', auth, createClub)
 router.delete('/delete/:slug', auth, deleteClub)
 router.put('/:_id/approve', auth, approveClub) 
-router.put('/argument', auth, argumentClub) //todo
+router.put('/:_id/argument', auth, argumentClub) //todo
 router.put('/argument/approve', auth, approveArgument) //todo
 router.get('/all', getAllClubs) 
 router.get('/slug/:slug', getClubsOnName)  

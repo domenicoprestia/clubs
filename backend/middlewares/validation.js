@@ -36,3 +36,12 @@ exports.clubValidation = (data) => {
 
    return schema.validate(data)
 }
+
+exports.argumentValidation = (data) => {
+   const schema = Joi.object({
+      argument: Joi.string().min(5).required(),
+      clubSlug: Joi.string().required(),
+   })
+
+   return schema.validate(data)
+}

@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
 const ArgumentSchema = mongoose.Schema({
-   username:{
+   creator:{
       type: String,
       required: [true, "You can't comment withtout a name"]
    },
-   phrase:{
+   argument:{
       type: String, 
       required: [true, "You have to add the phrase in order to argument under a club"]
    },

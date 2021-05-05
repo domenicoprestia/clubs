@@ -1,7 +1,8 @@
 const asyncHandler = require('../middlewares/async')
-const { clubValidation } = require('../middlewares/validation')
+const { clubValidation, argumentValidation } = require('../middlewares/validation')
 const Club = require('../models/Club')
 const User = require('../models/User')
+const Argument = require('../models/Argument')
 
 
 exports.createClub = asyncHandler(async(req,res,next) => {
@@ -22,7 +23,7 @@ exports.createClub = asyncHandler(async(req,res,next) => {
 exports.deleteClub = asyncHandler(async(req,res,next) => {
     const club = await Club.find({slug: req.params.slug})
 
-    if(club[0].creator.username != req.user.username) return res.status(400).json({success: false, message: `You can delete only your own clubs`})
+    if(club[0].creator != req.user.username) return res.status(400).json({success: false, message: `You can delete only your own clubs`})
     
     try{
         await Club.remove({slug: req.params.slug})
@@ -65,6 +66,28 @@ exports.approveClub = asyncHandler(async(req,res,next) => {
 
 
 exports.argumentClub = asyncHandler(async(req,res,next) => {
+    let user = req.user 
+    let club = await Club.findById(req.params._id)
+
+    if(!club) res.stauts(400).json({success: false, message: `Club not found`})
+
+    req.body.creator = user.username
+    req.body.clubSlug = club.slug
+
+    const {error} = argumentValidation(req.body)
+    console.log(errorx)
+    if(error) return res.status(200).json({success: false, message: `The argument is not valid`})
+
+    try{
+    const argument = await Argument.create(req.body)
+    res.status(400).json({success: false, message: argument})
+
+    }catch{
+        res.status(400).json({success: false, message: `Something went wrong`})
+    }
+    
+    club.arguments.push(argument)
+
 
 })
 
