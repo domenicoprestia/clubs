@@ -29,6 +29,7 @@ exports.deleteClub = asyncHandler(async(req,res,next) => {
 })
 
 exports.approveClub = asyncHandler(async(req,res,next) => {
+    
 
 })
 

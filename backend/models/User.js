@@ -23,13 +23,13 @@ const UserSchema = new mongoose.Schema({
    image: {
       type: String, 
    },
-   clubs:{
+   createdClubs:{
       type: Array,
    },
-   savedClubs:{
+   approvedClubs:{
       type: Array
    },
-   savedArguments:{
+   approvedArguments:{
       type: Array
    }
 })
