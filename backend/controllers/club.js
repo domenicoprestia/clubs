@@ -1,14 +1,18 @@
 const asyncHandler = require('../middlewares/async')
 const { clubValidation } = require('../middlewares/validation')
 const Club = require('../models/Club')
+const User = require('../models/User')
 
 
 exports.createClub = asyncHandler(async(req,res,next) => {
     const {error} = clubValidation(req.body)
     if(error) res.status(400).json({success: false, message: error.details[0].message})
-    req.body.creator = req.user 
+    req.body.creator = req.user.username
     try{
         const club = await Club.create(req.body)
+        console.log(club)
+        req.user.clubs.push(club)
+        await User.findByIdAndUpdate(req.user._id, req.user)
         res.status(200).json({success: true, data: club})
     }catch(err){
         if(err.code == 11000) res.status(400).json({success: false, message:`Club's name is duplicate`})
@@ -30,6 +34,31 @@ exports.deleteClub = asyncHandler(async(req,res,next) => {
 
 exports.approveClub = asyncHandler(async(req,res,next) => {
     
+    let user = req.user
+    let alreadyIn = false
+
+    if(user.approvedClubs) if(user.approvedClubs.length > 0) user.approvedClubs.forEach((club, index) => {
+
+        if(club._id == req.params._id) {
+
+            user.approvedClubs.splice(index, 1)
+            alreadyIn = true
+        }
+    })
+
+
+    if(!alreadyIn) {
+
+        const club = await Club.find({_id: req.params._id})
+        user.approvedClubs.push(club[0])
+        await User.findByIdAndUpdate(user._id, user)
+        res.status(200).json({success: true, message: `Club added succesfully`})
+    }
+    else{
+        await User.findByIdAndUpdate(user._id, user)
+        res.status(200).json({success: true, message: `Club removed succesfully`})
+    }
+
 
 })
 
