@@ -29,10 +29,11 @@ const ClubSchema = mongoose.Schema({
          type: String, 
       },
       arguments: {
-         type: Object 
+         type: Array
       },
       approvals: {
-         Number: Number
+         Number: Number,
+         default: 0
       },
       creator: {
          type: Object,
