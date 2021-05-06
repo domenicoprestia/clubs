@@ -32,8 +32,7 @@ const ClubSchema = mongoose.Schema({
          type: Array
       },
       approvals: {
-         Number: Number,
-         default: 0
+         type: Number
       },
       creator: {
          type: Object,

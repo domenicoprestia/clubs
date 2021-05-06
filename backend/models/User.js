@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema({
    image: {
       type: String, 
    },
-   createdClubs:{
+   clubs:{
       type: Array,
    },
    approvedClubs:{

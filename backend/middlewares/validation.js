@@ -31,7 +31,8 @@ exports.clubValidation = (data) => {
    const schema = Joi.object({
       name: Joi.string().min(6).required(),
       topic: Joi.string().required(),
-      question: Joi.string().required()
+      question: Joi.string().required(),
+      approvals: Joi.number().required()
    })
 
    return schema.validate(data)
@@ -41,6 +42,7 @@ exports.argumentValidation = (data) => {
    const schema = Joi.object({
       argument: Joi.string().min(5).required(),
       clubSlug: Joi.string().required(),
+      creator: Joi.string().required()
    })
 
    return schema.validate(data)

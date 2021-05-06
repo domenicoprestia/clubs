@@ -6,18 +6,21 @@ const Argument = require('../models/Argument')
 
 
 exports.createClub = asyncHandler(async(req,res,next) => {
+    req.body.approvals = 0
     const {error} = clubValidation(req.body)
     if(error) res.status(400).json({success: false, message: error.details[0].message})
     req.body.creator = req.user.username
     try{
         const club = await Club.create(req.body)
-        console.log(club)
         req.user.clubs.push(club)
         await User.findByIdAndUpdate(req.user._id, req.user)
+
         res.status(200).json({success: true, data: club})
     }catch(err){
         if(err.code == 11000) res.status(400).json({success: false, message:`Club's name is duplicate`})
+
     }
+
 })
 
 exports.deleteClub = asyncHandler(async(req,res,next) => {
@@ -39,7 +42,6 @@ exports.approveClub = asyncHandler(async(req,res,next) => {
     let alreadyIn = false
 
     if(user.approvedClubs) if(user.approvedClubs.length > 0) user.approvedClubs.forEach((club, index) => {
-
         if(club._id == req.params._id) {
 
             user.approvedClubs.splice(index, 1)
@@ -49,8 +51,9 @@ exports.approveClub = asyncHandler(async(req,res,next) => {
 
 
     if(!alreadyIn) {
-
         const club = await Club.find({_id: req.params._id})
+        await Club.findByIdAndUpdate(club._id, club)
+
         user.approvedClubs.push(club[0])
         await User.findByIdAndUpdate(user._id, user)
         res.status(200).json({success: true, message: `Club added succesfully`})
@@ -69,31 +72,54 @@ exports.argumentClub = asyncHandler(async(req,res,next) => {
     let user = req.user 
     let club = await Club.findById(req.params._id)
 
-    if(!club) res.stauts(400).json({success: false, message: `Club not found`})
+    if(!club) return res.status(400).json({success: false, message: `Club not found`})
 
     req.body.creator = user.username
     req.body.clubSlug = club.slug
 
     const {error} = argumentValidation(req.body)
-    console.log(errorx)
-    if(error) return res.status(200).json({success: false, message: `The argument is not valid`})
+
+    if(error) return res.status(200).json({success: false, message: error})
 
     try{
     const argument = await Argument.create(req.body)
-    res.status(400).json({success: false, message: argument})
+    club.arguments.push(argument)
+    await Club.findByIdAndUpdate(club._id, club)
+    res.status(400).json({success: true, message: argument})
 
     }catch{
         res.status(400).json({success: false, message: `Something went wrong`})
     }
-    
-    club.arguments.push(argument)
-
-
 })
 
 
 
 exports.approveArgument = asyncHandler(async(req,res,next) => {
+    let user = req.user
+    
+    let alreadyIn = false
+
+    if(user.approvedArguments) if(user.approvedArguments.length > 0) user.approvedArguments.forEach((club, index) => {
+        if(club._id == req.params._id) {
+
+            user.approvedArguments.splice(index, 1)
+            alreadyIn = true
+        }
+    })
+
+    if(!alreadyIn) {
+        const argument = await Argument.find({_id: req.params._id})
+        console.log(argument)
+        user.approvedArguments.push(argument[0])
+
+        await User.findByIdAndUpdate(user._id, user)
+        
+        res.status(200).json({success: true, message: `Argument approved succesfully`})
+    }
+    else{
+        await User.findByIdAndUpdate(user._id, user)
+        res.status(200).json({success: true, message: `Argument removed succesfully`})
+    }
 
 })
 
