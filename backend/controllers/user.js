@@ -50,7 +50,7 @@ exports.loginUser = asyncHandler(async(req,res,next) => {
    if(!validPass) return res.status(400).json('Username or password wrong')
 
    //create and assign token
-   const token = jwt.sign({_id: user.id}, process.env.SECRET_TOKEN)
+   const token = jwt.sign({_id: user._id}, process.env.SECRET_TOKEN)
    res.header('auth-token', token).send(token)
 })
 
