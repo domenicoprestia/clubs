@@ -5,6 +5,7 @@ const User = require('../models/User')
 const asyncHandler = require('../middlewares/async')
 const {registerValidation, loginValidation, editValidation} = require('../middlewares/validation')
 const Club = require('../models/Club')
+const Argument = require('../models/Argument')
 
 //@desc create a user
 //@router POST /api/v1/user/register
@@ -92,7 +93,31 @@ exports.editUser = asyncHandler(async(req,res,next) => {
 
 exports.deleteUser = asyncHandler(async(req,res,next) => {
    try{
-   await User.findByIdAndDelete(req.user._id)
+   
+   
+   await User.findByIdAndDelete(req.user._id, async () => {
+
+
+
+      const totalArgs = await Argument.find()
+      const totalClubs = await Club.find()
+   
+      totalArgs.forEach(async (arg, index) => {
+         console.log(arg)
+         if(arg.creator == req.user.username){
+            await Argument.findByIdAndDelete(arg._id)
+         }
+      })
+   
+      totalClubs.forEach(async (club, index) => {
+         console.log(club)
+         if(club.creator == req.user.username){
+            await Club.findByIdAndDelete(club._id)
+         }
+      })
+
+
+   })
    res.status(200).json({success: true, message:'You deleted your account with success'})
    }catch(err){
       res.status(400).json({success: false, message: 'Something went wrong'})

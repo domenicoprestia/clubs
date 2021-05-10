@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const Argument = require('./Argument')
+const Club = require('./Club')
 
 const UserSchema = new mongoose.Schema({
    username: {
@@ -33,5 +35,6 @@ const UserSchema = new mongoose.Schema({
       type: Array
    }
 })
+
 
 module.exports = mongoose.model('User', UserSchema)
