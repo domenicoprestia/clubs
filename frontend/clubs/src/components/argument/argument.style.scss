@@ -1,0 +1,19 @@
+.Argument {
+  margin-top: 30px;
+  .body {
+    font-weight: normal;
+  }
+
+  .creator {
+    font-weight: lighter;
+  }
+
+  .date {
+    font-weight: lighter;
+    text-align: right;
+  }
+
+  hr {
+    color: purple;
+  }
+}

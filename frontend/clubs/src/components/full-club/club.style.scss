@@ -1,0 +1,37 @@
+.Club {
+  margin: auto;
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.35);
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.144);
+  max-width: 30%;
+  color: black;
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-bottom: 80px;
+  text-align: left;
+  padding: 10px;
+  padding-left: 20px;
+  transition: all 0.5s;
+  padding-bottom: auto;
+  height: inherit;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  .name {
+    font-weight: bold;
+  }
+
+  .topic {
+    font-weight: lighter;
+  }
+
+  .question {
+    font-weight: lighter;
+    color: #991da2;
+  }
+
+  .text-container {
+    margin-left: 10%;
+  }
+}
