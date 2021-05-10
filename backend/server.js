@@ -7,6 +7,7 @@ const userRouter = require('./routes/user')
 const clubRouter = require('./routes/club')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 dotenv.config({path: './config/config.env'})
 
@@ -17,6 +18,7 @@ connectDB()
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(cors())
 
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/club', clubRouter)
