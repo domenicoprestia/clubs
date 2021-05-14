@@ -14,8 +14,6 @@
   padding-bottom: auto;
   height: inherit;
 
-  
-
   .name {
     font-weight: bold;
   }
@@ -31,5 +29,12 @@
 
   .text-container {
     margin-left: 10%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .Club {
+    max-width: 50%;
+    margin-left: 30%;
   }
 }
