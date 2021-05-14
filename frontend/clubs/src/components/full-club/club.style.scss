@@ -8,15 +8,13 @@
   margin-top: 20px;
   margin-bottom: 80px;
   text-align: left;
-  padding: 10px;
+  padding: 20px;
   padding-left: 20px;
   transition: all 0.5s;
   padding-bottom: auto;
   height: inherit;
 
-  &:hover {
-    transform: scale(1.03);
-  }
+  
 
   .name {
     font-weight: bold;

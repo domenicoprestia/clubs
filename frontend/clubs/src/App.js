@@ -4,6 +4,7 @@ import AllClubsContainer from './components/clubs-container/clubs.container'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import { Component } from 'react';
 import Club from './components/full-club/club.component';
+import UserPage from './pages/user-page/user.page'
 
 class App extends Component{
 
@@ -17,6 +18,9 @@ class App extends Component{
             <Route path='/' exact component={AllClubsContainer}/>
             <Route path='/club/:slug' exact>
               <Club/>
+            </Route>
+            <Route path='/user/:username' exact>
+              <UserPage/>
             </Route>
           </Switch>
         </div>

@@ -1,5 +1,18 @@
 .Argument {
   margin-top: 30px;
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.35);
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 25px; 
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  transition: all 0.5s;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+
   .body {
     font-weight: normal;
   }
@@ -11,6 +24,7 @@
   .date {
     font-weight: lighter;
     text-align: right;
+    font-size: smaller;
   }
 
   hr {

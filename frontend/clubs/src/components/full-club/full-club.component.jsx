@@ -7,9 +7,9 @@ const FullClub = ({club}) => {
    return(
       <div className='club'>
       {club ? <h2 className='name'>{club.slug}</h2> : "select a club"}
-      {club ? <h3 className='topic'>{club.topic}</h3> : "select a club"}
-      {club ? <h3 className='question'>{club.question}</h3> : "select a club"}
-      {club ? club.arguments.map(arg =>  (<Argument key={arg._id} argument={arg}/>)) : "select a club"}
+      {club ? <h3 className='topic'>{club.topic}</h3> : ""}
+      {club ? <h3 className='question'>{club.question}</h3> : ""}
+      {club ? club.arguments.map(arg =>  (<Argument key={arg._id} argument={arg}/>)) : ""}
       </div>
    )
 }

@@ -1,14 +1,20 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './argument.style.scss'
 
 const Argument = ({argument}) => {
 
+
+   const dataEditor = (data) => {
+      data = data.replace('T', ' ')
+      return data
+   }
+
    return(
       <div className='Argument'>
          <p className='body'>{argument.argument}</p>
-         <p className='creator'>@{argument.creator}</p>
-         <p className='date'>{argument.createdAt}</p>
-         <hr></hr>
+         <p className='creator'><Link to={`/user/${argument.creator}`}>@{argument.creator}</Link></p>
+         <p className='date'>{dataEditor(argument.createdAt)}</p>
       </div>
    )
 }
