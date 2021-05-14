@@ -123,3 +123,14 @@ exports.deleteUser = asyncHandler(async(req,res,next) => {
       res.status(400).json({success: false, message: 'Something went wrong'})
    }
 })
+
+//@desc search for a user
+//@path GET api/v1/user/:username
+//@access public
+
+exports.getUser = asyncHandler(async (req, res) => {
+   const user = await User.find({username: req.params.username})
+
+   if(user) return res.status(200).json({success: true, message: user})
+   else return res.status(400).json({success: false, message:'There is no user with that username'})
+})
