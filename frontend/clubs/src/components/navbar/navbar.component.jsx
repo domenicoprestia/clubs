@@ -9,10 +9,10 @@ const Navbar = () => {
          <ul>
          <h3 className='title'>Discovery</h3>
             <li>
-               <a href='/#Fiction'><span className='name'>Search Topic</span> 🔎</a>
+               <Link to='/search/topic'><span className='name'>Search Topic</span> 🔎</Link>
             </li>
             <li>
-               <a href='/#Poetry'><span className='name'>Search Name</span> 📜</a>
+               <Link to='/search/slug'><span className='name'>Search Name</span> 📜</Link>
             </li>
          <h3 className='title'>User's area</h3>
             <li>

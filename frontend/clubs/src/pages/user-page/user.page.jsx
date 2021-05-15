@@ -9,10 +9,19 @@ import './user.style.scss'
 const ProfilePage = () => {
     const {username} = useParams()
     const [selectedUser, setSelectedUser] = useState(null)
+    const [requestStatus, setRequestStatus] = useState(null)
+
     useEffect(() => {
         async function fetchUsername(){
+            
+            try{
             const request = await axios.get(requests.userOnName + username)
             setSelectedUser(request.data.message)
+            setRequestStatus(200)
+            }catch{
+            setRequestStatus(400)
+            }
+
         }
 
         fetchUsername()
@@ -21,7 +30,7 @@ const ProfilePage = () => {
         
     return(
         <div className='userPage'>
-            {selectedUser != null && selectedUser.length != 0 ? <Profile user={selectedUser}/> : <h1>Oops, no user found with that username... 🤖</h1>}
+            {selectedUser != null && selectedUser.length != 0 ? <Profile user={selectedUser}/> : <h1>Oops, no user found... 🤖</h1>}
         </div>
     )
 }

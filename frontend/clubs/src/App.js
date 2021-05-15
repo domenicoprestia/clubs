@@ -3,8 +3,10 @@ import Navbar from './components/navbar/navbar.component'
 import AllClubsContainer from './components/clubs-container/clubs.container'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import { Component } from 'react';
-import Club from './components/full-club/club.component';
+import Club from './pages/club-page/club.page';
 import ProfilePage from './pages/user-page/user.page'
+import SearchTopic from './pages/search-pages/search-topic/search-topic.page';
+import SearchSlug from './pages/search-pages/search-slug/search-slug.page';
 
 class App extends Component{
 
@@ -22,6 +24,8 @@ class App extends Component{
             <Route path='/user/:username' exact>
               <ProfilePage/>
             </Route>
+            <Route path='/search/topic' exact component={SearchTopic}></Route>
+            <Route path='/search/slug' exact component={SearchSlug}></Route>
           </Switch>
         </div>
       </Router>
