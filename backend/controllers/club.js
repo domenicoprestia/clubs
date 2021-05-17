@@ -133,23 +133,58 @@ exports.getAllClubs = asyncHandler(async(req,res,next) => {
 
 })
 
-exports.getClubsOnName = asyncHandler(async(req,res,next) => {
+exports.getClubOnName = asyncHandler(async(req,res,next) => {
 
     let clubs 
 
    if(req.params.slug) {clubs = await Club.find({slug: req.params.slug})}
 
-   if(clubs.length == 0) return res.status(400).json({success: false, message: "No clubs found with that name"})
+   if(clubs.length == 0) return res.status(400).json({success: false, message: "No clubs found with that slug"})
    else res.status(200).json({success: true, data: clubs})
    
 })
 
+exports.getClubsOnName = asyncHandler(async(req,res,next) => {
+    let clubs 
+    let resClubs = []
+
+    if(req.params.slug) {clubs = await Club.find()}
+    if(clubs.length == 0) return res.status(400).json({success: false, message: "No clubs found with that slug"})
+
+    clubs.forEach(club => {
+        if(club.slug.includes(req.params.slug)) resClubs.push(club)
+    })
+    
+    res.status(200).json({success: true, data: resClubs})
+})
+
+
 exports.getClubsOnTopic = asyncHandler(async(req,res,next) => {
     
    let clubs
+   let resClubs = []
 
-   if(req.params.topic) {clubs = await Club.find({topic: req.params.topic})}
-
+   if(req.params.topic) {clubs = await Club.find()}
    if(clubs.length == 0) return res.status(400).json({success: false, message: "No clubs found with that topic"})
-   else res.status(200).json({success: true, data: clubs})
+  
+   clubs.forEach(club => {
+    if(club.topic.includes(req.params.topic)) resClubs.push(club)
+    })
+
+    res.status(200).json({success: true, data: resClubs})
+})
+
+exports.getTopClubs = asyncHandler(async(req,res,next) => {
+
+    let clubs = await Club.aggregate([{
+           "$project": {
+            "arguments": 1,
+            "length": { "$size": "$arguments" }
+        }},
+        { "$sort": { "length": -1 } },
+        { "$limit": 5 }
+        ])
+
+    if(clubs.length == 0) return res.status(400).json({success: false, message: "No existing clubs"})
+    else return res.status(200).json({success: true, data: clubs})
 })
