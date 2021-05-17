@@ -4,7 +4,7 @@
     margin: auto;
     -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.35);
     box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.144);
-    max-width: 30%;
+    width: 25%;
     color: black;
     border-radius: 20px;
     margin-top: 20px;
@@ -12,16 +12,27 @@
     text-align: left;
     padding-left: 20px;
     transition: all 0.5s;
-    padding-bottom: auto;
-    height: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
   
     .searchInput {
-      width: 300px;
+      width: 70%;
       height: 50px;
       border-radius: 12px;
       border:none
     }
-  
+
+    input:focus{
+      outline: none;
+    }
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+
     .searchButton {
       height: 50px;
       width: 40px;
@@ -40,13 +51,8 @@
   
   @media screen and(max-width: 800px) {
     .search {
-      margin-top: 3%;
-      
-    max-width: 50%;
-    margin-left: 30%;
-  
+
       .searchInput {
-        width: 140px;
         height: 50px;
         border-radius: 12px;
         border: none;
