@@ -7,6 +7,9 @@ const Argument = ({argument}) => {
 
    const dataEditor = (data) => {
       data = data.replace('T', ' ')
+      data = data.split(':')
+      data[2] = ''
+      data = data.join(':')
       return data
    }
 
