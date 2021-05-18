@@ -178,6 +178,11 @@ exports.getTopClubs = asyncHandler(async(req,res,next) => {
 
     let clubs = await Club.aggregate([{
            "$project": {
+            "name": 1,
+            "creator": 1,
+            "topic": 1,
+            "question": 1,
+            "slug": 1,
             "arguments": 1,
             "length": { "$size": "$arguments" }
         }},
