@@ -19,10 +19,15 @@ const SearchedClubs = ({type}) => {
     return(
         <div className='savedClubs'>
 
-        {clubs = 'noClubsSearched' ? null : clubs.map(club => (               
+        {clubs == 'noClubsSearched' ? '' : <h2 className='title'>Searched clubs</h2> }
+        {clubs == 'noClubsSearched' ? '' : clubs.map(club => ( 
+                
+                             
                 <Link key={club._id} to={`/club/${club.slug}`}>
                   <ClubPreview key={club._id} club={club}/>
                </Link>
+
+
         ))}
 
         </div>

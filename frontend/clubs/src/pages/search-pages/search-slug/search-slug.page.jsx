@@ -8,7 +8,9 @@ const SearchSlug = () => {
     return(
         <div className='searchSlug'>
             <SearchBar type='slug'/>
-            <TopClubs/>
+            <div className='topSection'>
+                <TopClubs/>
+            </div>
             <SearchedClubs type='slug'/>
         </div>
     )

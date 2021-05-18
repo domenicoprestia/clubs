@@ -18,13 +18,14 @@ const TopClubs = () => {
     return(
         <div className='topClubs'>
             
-            <h1>Most argumented clubs</h1>
-
+            <h2 className='title'>Top clubs</h2>
+            <div className='topContainer'>
             {topClubs == 404 ? null : topClubs.map(club => (
                 <Link key={club._id} to={`/club/${club.slug}`}>
                     <ClubPreview key={club._id} club={club}/>
                 </Link>
             ))}
+            </div>
 
         </div>
     )

@@ -6,7 +6,7 @@ export const bookSlice = createSlice({
         value: 'noClubsSearched'
     },
     reducers: {
-        setSlugBooks: (state, action) => {
+        setSlugClubs: (state, action) => {
             state.value = action.payload
         },
 
@@ -16,6 +16,6 @@ export const bookSlice = createSlice({
     }
 })
 
-export const {setSlugBooks, setSlugDefault} = bookSlice.actions
+export const {setSlugClubs, setSlugDefault} = bookSlice.actions
 
 export default bookSlice.reducer

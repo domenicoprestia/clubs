@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {setTopicBooks, setTopicDefault} from '../../utils/slicers/searchedTopicSlicer'
-import {setSlugBooks, setSlugDefault} from '../../utils/slicers/searchedSlugSlicer'
+import {setTopicClubs, setTopicDefault} from '../../utils/slicers/searchedTopicSlicer'
+import {setSlugClubs, setSlugDefault} from '../../utils/slicers/searchedSlugSlicer'
 import axios from '../../utils/axios'
 import requests from '../../utils/requests'
 
@@ -27,14 +27,14 @@ const SearchBar = ({type}) => {
 
             await dispatch(setSlugDefault())
             const request = await axios.get(requests.clubsOnName + inputField)
-            await dispatch(setSlugDefault(request.data.data))
+            await dispatch(setSlugClubs(request.data.data))
             console.log(slugBooks)
 
         }else if(type == 'topic'){
 
             await dispatch(setTopicDefault())
             const request = await axios.get(requests.clubOnTopic + inputField)
-            await dispatch(setTopicBooks(request.data.data))
+            await dispatch(setTopicClubs(request.data.data))
             console.log(topicBooks)
             
 
