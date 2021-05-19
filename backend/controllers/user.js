@@ -134,3 +134,7 @@ exports.getUser = asyncHandler(async (req, res) => {
    if(user) return res.status(200).json({success: true, message: user})
    else return res.status(400).json({success: false, message:'There is no user with that username'})
 })
+
+exports.getUserAuth = asyncHandler(async (req,res) => {
+   res.status(200).json({success: true, message: req.user})
+})

@@ -6,7 +6,8 @@ const requests = {
    clubOnTopic: `/api/v1/club/topic/`,
    clubsOnName: `/api/v1/club/all/slug/`,
    login: `/api/v1/user/login`,
-   register: `/api/v1/user/register`
+   register: `/api/v1/user/register`,
+   userAuth: `/api/v1/user/auth/getuser`
    
 }
 

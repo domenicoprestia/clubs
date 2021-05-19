@@ -1,69 +1,73 @@
-.loginForm{
-    margin: auto;
+.loginForm {
+  margin: auto;
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.35);
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.144);
+  max-width: 30%;
+  color: black;
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-bottom: 80px;
+  text-align: left;
+  padding: 30px;
+  transition: all 0.5s;
+  padding-bottom: auto;
+  height: inherit;
+  text-align: left;
+
+  .title {
+    font-weight: lighter;
+    color: purple;
+  }
+
+  .input {
+    margin-top: 1%;
     -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.35);
     box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.144);
-    max-width: 30%;
-    color: black;
     border-radius: 20px;
-    margin-top: 20px;
-    margin-bottom: 80px;
-    text-align: left;
-    padding: 30px;
-    transition: all 0.5s;
-    padding-bottom: auto;
-    height: inherit;
-    text-align: left;
+    max-width: 40%;
+    padding-left: 20px;
+  }
 
-    .title{
-        font-weight: lighter;
-        color: purple;
+  .formInput {
+    width: inherit;
+    height: 50px;
+    border-radius: 12px;
+    border: none;
+    transition: 450ms transform;
+
+    &:hover {
+      transform: scale(1.04);
     }
+  }
 
-    .input{
-        margin-top: 1%;
-        -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.35);
-        box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.144);
-        border-radius: 20px;
-        max-width: 40%;
-        padding-left: 20px;
-    }
-
-    .formInput {
-        width: inherit;
-        height: 50px;
-        border-radius: 12px;
-        border:none;
-        transition: 450ms transform;
-
-        &:hover{
-            transform: scale(1.04);
-        }
-      }
-
-    input:focus{
-        outline: none;
-      }
-      input[type="search"]::-webkit-search-decoration,
-      input[type="search"]::-webkit-search-cancel-button,
-      input[type="search"]::-webkit-search-results-button,
-      input[type="search"]::-webkit-search-results-decoration { display: none; }
-
-
+  input:focus {
+    outline: none;
+  }
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+  }
 }
 
-      .searchButton {
-        margin-top: 20px;
-        height: 50px;
-        width: 25%;
-        border-radius: 12px;
-        border: none;
-        background-color: #8f1e97;
-        transition: transform 400ms;
-        color: white;
-        font-weight: bold;
-    
-        &:hover {
-          transform: scale(1.05);
-        }
-    }
+.searchButton {
+  margin-top: 20px;
+  height: 50px;
+  width: 25%;
+  border-radius: 12px;
+  border: none;
+  background-color: #8f1e97;
+  transition: transform 400ms;
+  color: white;
+  font-weight: bold;
 
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+#error {
+  font-weight: lighter;
+  color: red;
+}

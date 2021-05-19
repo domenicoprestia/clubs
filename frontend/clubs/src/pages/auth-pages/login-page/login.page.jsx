@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUser} from '../../../utils/slicers/userSlicer'
 import axios from '../../../utils/axios'
 import requests from '../../../utils/requests'
 import './login.style.scss'
@@ -7,6 +9,8 @@ export const Login = () => {
 
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
+    const user = useSelector((state) => state.user.value)
+    const dispatch = useDispatch()
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value)
@@ -17,7 +21,17 @@ export const Login = () => {
     }
 
     const handleSubmit = async (e) => {
-       const request = axios.post(requests.login)
+        e.preventDefault()
+        try{
+        document.getElementById('error').textContent = ''     
+       const request = await axios.post(requests.login, {username: username, password: password})
+       const token = request.data
+       const requestUser = await axios.get(requests.userAuth, {headers: {'auth-token': token}})
+       dispatch(setUser(requestUser.data.message))
+        }catch{
+         document.getElementById('error').textContent = 'Username or password are incorrect'
+        }
+       
     }
 
     return(
@@ -31,6 +45,7 @@ export const Login = () => {
             <div className='input'>
                 <input type='password' className='formInput' placeholder='Password...' onChange={handlePasswordChange} required></input>
             </div>
+                <p id='error'></p>
             <button type='submit' className='searchButton'>Login</button>
             </form>
         </div>
