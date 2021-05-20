@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {setUser, setUserDefault} from '../../utils/slicers/userSlicer.js'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import './navbar.style.scss'
 
 const Navbar = () => {
@@ -37,7 +37,7 @@ const Navbar = () => {
                {user != 'notLogged' ? <a href='/profile#approvedArguments'><span className='name'>Approved arguments</span> 💖</a> : ''}
             </li>
             <li>
-               {user != 'notLogged' ? <a href='/logout' onClick={logout}><span className='name'>Logout</span> 🏃‍♂️</a> : ''}
+               {user != 'notLogged' ? <a href='/' onClick={logout}><span className='name'>Logout</span> 🏃‍♂️</a> : ''}
             </li>
          </ul>
       </div>

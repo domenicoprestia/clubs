@@ -13,6 +13,7 @@
   padding-bottom: auto;
   height: inherit;
   text-align: left;
+  
 
   .title {
     font-weight: lighter;
@@ -24,14 +25,15 @@
     -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.35);
     box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.144);
     border-radius: 20px;
-    max-width: 40%;
-    padding-left: 20px;
+    max-width: 30%;
+    padding-left: 10px;
+    padding-right: 30px;
   }
 
   .formInput {
-    width: inherit;
+    width: auto;
     height: 50px;
-    border-radius: 12px;
+    border-radius: 15px;
     border: none;
     transition: 450ms transform;
 
@@ -54,7 +56,7 @@
 .searchButton {
   margin-top: 20px;
   height: 50px;
-  width: 25%;
+  width: 100px;
   border-radius: 12px;
   border: none;
   background-color: #8f1e97;
@@ -67,7 +69,4 @@
   }
 }
 
-#error {
-  font-weight: lighter;
-  color: red;
-}
+

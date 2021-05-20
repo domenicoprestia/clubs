@@ -4,6 +4,7 @@ import { setUser} from '../../../utils/slicers/userSlicer'
 import axios from '../../../utils/axios'
 import requests from '../../../utils/requests'
 import './login.style.scss'
+import { Redirect } from 'react-router'
 
 export const Login = () => {
 
@@ -23,11 +24,14 @@ export const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try{
+
         document.getElementById('error').textContent = ''     
        const request = await axios.post(requests.login, {username: username, password: password})
        const token = request.data
        const requestUser = await axios.get(requests.userAuth, {headers: {'auth-token': token}})
+       requestUser.data.message.token = token
        dispatch(setUser(requestUser.data.message))
+
         }catch{
          document.getElementById('error').textContent = 'Username or password are incorrect'
         }
@@ -36,6 +40,8 @@ export const Login = () => {
 
     return(
         <div className='loginForm'>
+            {user != 'notLogged' ? <Redirect to='/'></Redirect> : ''}
+
             <form onSubmit={handleSubmit}>
             <h3 className='title'>Username</h3>
             <div className='input'>
@@ -48,6 +54,7 @@ export const Login = () => {
                 <p id='error'></p>
             <button type='submit' className='searchButton'>Login</button>
             </form>
+            
         </div>
     )
 }
