@@ -13,7 +13,6 @@
   padding-bottom: auto;
   height: inherit;
   text-align: left;
-  
 
   .title {
     font-weight: lighter;
@@ -22,8 +21,6 @@
 
   .input {
     margin-top: 1%;
-    -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.35);
-    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.144);
     border-radius: 20px;
     max-width: 30%;
     padding-left: 10px;
@@ -69,4 +66,10 @@
   }
 }
 
-
+@media screen and(max-width: 800px) {
+  .loginForm {
+    max-width: none;
+    width: 280px;
+    margin-left: 30%;
+  }
+}

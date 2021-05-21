@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {setUser, setUserDefault} from '../../utils/slicers/userSlicer.js'
 import {Link, Redirect} from 'react-router-dom'
@@ -11,7 +11,12 @@ const Navbar = () => {
 
    const logout = () => {
        dispatch(setUserDefault())
+       localStorage.removeItem('user')
    }
+
+   useEffect(() => {
+      if(user == 'notLogged' && JSON.parse(localStorage.getItem('user'))) dispatch(setUser(JSON.parse(localStorage.getItem('user'))))
+   }, [user])
 
    return(
       <div className='side-nav'>

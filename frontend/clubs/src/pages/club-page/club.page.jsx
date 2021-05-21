@@ -33,9 +33,12 @@ const Club = () => {
 
    return (
       <div className='clubchatcontainer'>
+
+      <div className='wrapper'>
          <div className={user != 'notLogged' ? 'chatbar' : ''}>
-            {user != 'notLogged' ? <Chatbar/> : ''}
+            {user != 'notLogged' ? <Chatbar slug={slug}/> : ''}
          </div>
+      </div>
          
          <div className='Club'>
             {requestStatus == 400 ? <h3>Oops the club does not exist...</h3> : ''}

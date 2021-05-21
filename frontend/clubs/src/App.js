@@ -12,7 +12,6 @@ import Register from './pages/auth-pages/reistration-page/register.page'
 
 class App extends Component{
 
-
   render(){
     return(
       <Router>

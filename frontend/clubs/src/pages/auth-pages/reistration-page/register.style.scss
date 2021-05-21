@@ -1,34 +1,33 @@
-.registerFrom{
-    margin: auto;
+.registerFrom {
+  margin: auto;
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.35);
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.144);
+  max-width: 30%;
+  color: black;
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-bottom: 80px;
+  text-align: left;
+  padding: 20px;
+  padding-left: 20px;
+  transition: all 0.5s;
+  padding-bottom: auto;
+  height: inherit;
+
+  .formInput {
+    width: auto;
+    height: 50px;
     -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.35);
     box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.144);
-    max-width: 30%;
-    color: black;
     border-radius: 20px;
-    margin-top: 20px;
-    margin-bottom: 80px;
-    text-align: left;
-    padding: 20px;
-    padding-left: 20px;
-    transition: all 0.5s;
-    padding-bottom: auto;
-    height: inherit;
-    
-      .formInput {
-        width: auto;
-        height: 50px;
-        -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.35);
-        box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.144);
-        border-radius: 20px;
-        border: none;
-        transition: 450ms transform;
-        padding: 0 20px;
-    
-        &:hover {
-          transform: scale(1.04);
-        }
-      }
+    border: none;
+    transition: 450ms transform;
+    padding: 0 20px;
 
+    &:hover {
+      transform: scale(1.04);
+    }
+  }
 }
 
 .error {
@@ -44,4 +43,12 @@ input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   display: none;
+}
+
+@media screen and(max-width: 800px) {
+  .registerFrom {
+    max-width: none;
+    width: 300px;
+    margin-left: 30%;
+  }
 }

@@ -42,10 +42,19 @@ export const Register = () => {
             const requestUser = await axios.get(requests.userAuth, {headers: {'auth-token': token}})
             requestUser.data.message.token = token
             dispatch(setUser(requestUser.data.message))
-
         }
 
+        
+
     }
+
+    useEffect(() => {
+
+        if(user != 'notLogged'){
+        localStorage.setItem('user', JSON.stringify(user))
+        }
+
+    }, [user])
 
     useEffect(() => {
 
@@ -113,7 +122,7 @@ export const Register = () => {
                 <input type='password' name='confirmPassword' className='formInput' placeholder='Confirm Password...' onChange={handleConfirmPassword} required></input>
                 <p htmlFor='confirmPassword' className='error' id='errorConfirm'></p>
             </div>
-            
+                <button type='submit' className='searchButton'>Register</button>
             </form>
         </div>
     )

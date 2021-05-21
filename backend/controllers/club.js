@@ -79,13 +79,13 @@ exports.argumentClub = asyncHandler(async(req,res,next) => {
 
     const {error} = argumentValidation(req.body)
 
-    if(error) return res.status(200).json({success: false, message: error})
+    if(error) return res.status(400).json({success: false, message: error})
 
     try{
     const argument = await Argument.create(req.body)
     club.arguments.push(argument)
     await Club.findByIdAndUpdate(club._id, club)
-    res.status(400).json({success: true, message: argument})
+    res.status(200).json({success: true, message: argument})
 
     }catch{
         res.status(400).json({success: false, message: `Something went wrong`})
