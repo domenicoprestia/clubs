@@ -40,7 +40,7 @@ const Club = () => {
          </div>
       </div>
          
-         <div className='Club'>
+         <div className='Clubb'>
             {requestStatus == 400 ? <h3>Oops the club does not exist...</h3> : ''}
             {selectedClub ? <FullClub club={selectedClub}/> : ''}
          </div>

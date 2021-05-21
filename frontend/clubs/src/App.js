@@ -9,6 +9,7 @@ import SearchTopic from './pages/search-pages/search-topic/search-topic.page';
 import SearchSlug from './pages/search-pages/search-slug/search-slug.page';
 import Login from './pages/auth-pages/login-page/login.page'
 import Register from './pages/auth-pages/reistration-page/register.page'
+import PersonalPage from './pages/personal-page/personal.page';
 
 class App extends Component{
 
@@ -19,6 +20,7 @@ class App extends Component{
           <Navbar/>
           <Switch>
             <Route path='/' exact component={AllClubsContainer}/>
+            <Route path='/profile' exact component={PersonalPage}/>
             <Route path='/login' exact component={Login}/>
             <Route path='/register' exact component={Register}/>
             <Route path='/club/:slug' exact>
