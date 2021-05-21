@@ -110,7 +110,6 @@ exports.approveArgument = asyncHandler(async(req,res,next) => {
     if(!alreadyIn) {
         const argument = await Argument.find({_id: req.params._id})
         if(!argument[0]) return res.status(200).json({success: false, message: `Argument does not exist`})
-        console.log(argument)
         user.approvedArguments.push(argument[0])
 
         await User.findByIdAndUpdate(user._id, user)
