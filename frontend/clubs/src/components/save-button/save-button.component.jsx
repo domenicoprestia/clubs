@@ -31,7 +31,7 @@ const SaveButton = ({id, type}) => {
    return(
       <div className='save-button'>
         {type == 'argument' ? user.approvedArguments.forEach(argument => {if(argument._id == id) same=true}) : user.approvedClubs.forEach(club => {if(club._id == id) same = true})}
-         {same ? <p className='save' onClick={handleClick}>Remove this! 🗑️</p> : <p className='save' onClick={handleClick}>Save this! 🌟</p>}
+         {same ? <p className='save' onClick={handleClick}><span className='caption'>Remove this!</span> 🗑️</p> : <p className='save' onClick={handleClick}> <span className='caption'>Save this!</span>🌟</p>}
       </div>
    )
 }

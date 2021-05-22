@@ -40,5 +40,11 @@
   .Clubb {
     max-width: 50%;
     margin-left: 30%;
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
   }
 }
