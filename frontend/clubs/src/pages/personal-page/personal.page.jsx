@@ -1,36 +1,72 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import ClubPreview from '../../components/club-preview/club.component'
 import Argument from '../../components/argument/argument.component'
+
 import './personal.style.scss'
+import { Link, Redirect } from 'react-router-dom'
+import SaveButton from '../../components/save-button/save-button.component'
 
 const PersonalPage = () => {
    
-   const user = useSelector(state => state.user.value)
+   let user = useSelector((state) => state.user.value)
 
    const editEmail = (str, n) => {
       return str?.length > n ? str.substr(0, n-1) + "..." : str;
    }
+
+   const dataEditor = (data) => {
+      data = data.replace('T', ' ')
+      data = data.split(':')
+      data[2] = ''
+      data = data.join(':')
+      data = data.substr(0, data.length-1)
+      return data
+   }
    
    return(
+      <div>
       <div className='personal-page'>
-            <a href='/profile#approvedArguments'><span className='name'>Edit Profile</span> ✏️</a>
-            <h1 className='username'>{user.username}</h1>
+      
+         {user !== `notLogged` ? <a href='/profile/edit' className='editTag'><span>Edit Profile</span> ✏️</a> : null}   
+         {user !== `notLogged` ? <h1 className='username'>{user.username}</h1> : <h2>You are not logged in...</h2>}   
             <h3 className='email'>{editEmail(user.email, 20)}</h3>
-         <div className='approvedClubs'>
-            <h4 className='title'>Approved clubs</h4>
-            {user.approvedClubs != undefined ? user.approvedClubs.forEach(club => {
+         </div>
+         
+         {user.approvedClubs !== undefined && user.approvedClubs.length !== 0 ? <h3 className='title'>Approved clubs</h3> : null}
+            <div className='approvedClubs' id='approvedClubs'>
+            
+               {user.approvedClubs !== undefined ? user.approvedClubs.map(club => (
+                  <Link to={`/club/${club.slug}`}>
                <ClubPreview key={club._id} club={club}/>
-            }) : null}
-         </div>
+                  </Link>
+               )) : null}
+            
 
-         <div className='title'>
-            <h4 className='title'>Approved arguments</h4>
-            {user.approvedArguments != undefined ? user.approvedArguments.forEach(arg => {
-               <Argument key={arg._id} argument={arg}/>
-            }) : null}
-         </div>
+            </div>
 
+          {user.approvedArguments !== undefined && user.approvedArguments.length !== 0 ? <h3 className='title'>Approved arguments</h3> : null}
+            <div className='approvedArguments' id='approvedArguments'>
+
+            <div className={user !== 'notLogged' && user.approvedArguments !== undefined && user.approvedArguments[0] !== undefined ? 'argumentContainer' : ''}>
+               {user.approvedArguments !== undefined ? user.approvedArguments.map(arg => (
+                  
+                  <div className='argument'>
+                  <div className='container'>
+                     <Link to={`/club/${arg.clubSlug}`}><h3 className='place'>{arg.clubSlug}</h3></Link>
+                     <SaveButton id={arg._id} type='argument'/>
+                  </div>
+                        <p className='body'>{arg.argument}</p>
+                     
+
+                     <p className='creator'><Link to={`/user/${arg.creator}`}>@{arg.creator}</Link></p>
+                     <p className='date'>{dataEditor(arg.createdAt)}</p>
+
+                  </div>
+               )) : null}
+            </div>
+
+            </div>
       </div>
    )
 }

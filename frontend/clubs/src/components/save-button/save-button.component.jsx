@@ -12,6 +12,7 @@ const SaveButton = ({id, type}) => {
    let same 
 
    const handleClick = async () => {
+   
       if(type == 'club'){
       await axios.put(requests.approveClub + `${id}/approve`,{}, {headers: {'auth-token': user.token}})
       const newUser = await axios.get(requests.userOnName + user.username)

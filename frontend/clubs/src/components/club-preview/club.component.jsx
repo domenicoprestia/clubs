@@ -13,7 +13,7 @@ const ClubPreview = ({club}) => {
          <div className='text-container'>
             <div className='container'>
                <h2 className='name'>{club.slug}</h2>
-               <Link to='/'>
+               <Link to={window.location}>
                {user != `notLogged` ? <SaveButton id={club._id} type='club' />  :  null}
                </Link>
             </div>

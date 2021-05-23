@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {setUser, setUserDefault} from '../../utils/slicers/userSlicer.js'
 import {Link, Redirect} from 'react-router-dom'
+import axios from '../../utils/axios'
+import requests from '../../utils/requests'
 import './navbar.style.scss'
 
 const Navbar = () => {
@@ -14,9 +16,22 @@ const Navbar = () => {
        localStorage.removeItem('user')
    }
 
-   useEffect(() => {
-      if(user == 'notLogged' && JSON.parse(localStorage.getItem('user'))) dispatch(setUser(JSON.parse(localStorage.getItem('user'))))
-   }, [user])
+   useEffect(async () => {
+      if(user == 'notLogged' && JSON.parse(localStorage.getItem('user'))) 
+      {
+         let tempUser = JSON.parse(localStorage.getItem('user'))
+         let dbUser = await axios.get(requests.userAuth, {headers: {'auth-token': tempUser.token}})
+
+         dbUser.data.message.token = tempUser.token
+
+         if(tempUser == dbUser) dispatch(setUser(JSON.parse(localStorage.getItem('user'))))
+         else {
+            dispatch(setUser(dbUser.data.message)) 
+            localStorage.setItem('user', JSON.stringify(dbUser.data.message))
+         }
+         
+         }   
+      }, [user])
 
    return(
       <div className='side-nav'>

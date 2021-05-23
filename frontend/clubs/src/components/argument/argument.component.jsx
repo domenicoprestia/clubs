@@ -13,6 +13,7 @@ const Argument = ({argument}) => {
       data = data.split(':')
       data[2] = ''
       data = data.join(':')
+      data = data.substr(0, data.length - 1)
       return data
    }
 
