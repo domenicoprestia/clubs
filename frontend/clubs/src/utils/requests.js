@@ -10,7 +10,9 @@ const requests = {
    userAuth: `/api/v1/user/auth/getuser`,
    argumentClub: `/api/v1/club/`,
    approveClub: `/api/v1/club/`,
-   approveArgument: `/api/v1/club/`
+   approveArgument: `/api/v1/club/`,
+   createClub: `/api/v1/club/create`,
+   editUser: `/api/v1/user/edit`
 }
 
 export default requests

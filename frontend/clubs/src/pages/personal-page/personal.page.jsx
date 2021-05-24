@@ -28,11 +28,21 @@ const PersonalPage = () => {
       <div>
       <div className='personal-page'>
       
-         {user !== `notLogged` ? <a href='/profile/edit' className='editTag'><span>Edit Profile</span> ✏️</a> : null}   
+         {user !== `notLogged` ? <a href='/profile/edit' className='editTag'><span className='textEdit'>Edit Profile</span> ✏️</a> : null}   
          {user !== `notLogged` ? <h1 className='username'>{user.username}</h1> : <h2>You are not logged in...</h2>}   
             <h3 className='email'>{editEmail(user.email, 20)}</h3>
          </div>
          
+         {user.clubs !== undefined && user.clubs.length !== 0 ? <h3 className='title'>Created clubs</h3> : ''}
+            <div className='approvedClubs' id='approvedClubs'>
+            
+               {user.clubs !== undefined ? user.clubs.map(club => (
+                  <Link to={`/club/${club.slug}`}>
+               <ClubPreview key={club._id} club={club}/>
+                  </Link>
+               )) : null}
+            </div>
+
          {user.approvedClubs !== undefined && user.approvedClubs.length !== 0 ? <h3 className='title'>Approved clubs</h3> : null}
             <div className='approvedClubs' id='approvedClubs'>
             

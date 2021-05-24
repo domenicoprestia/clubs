@@ -13,6 +13,7 @@
   transition: all 0.5s;
   padding-bottom: auto;
   height: inherit;
+  margin-left: 30%;
 
   .editTag {
     color: black;
@@ -52,6 +53,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
+  margin-left: 1%;
 
   .place {
     text-align: left;
@@ -88,8 +90,20 @@
   }
 }
 
+@media screen and (max-width: 1200px){
+  .textEdit{
+    display: none;
+  }
+}
+
 @media screen and (max-width: 800px) {
   .personal-page {
-    margin-left: 200px;
+    margin-left: 30%;
+    max-width: 55%;
   }
+
+  .argumentContainer{
+    margin-left: 15%;
+  }
+
 }

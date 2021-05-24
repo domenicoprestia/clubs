@@ -51,6 +51,11 @@ const Navbar = () => {
                
             </li>
             <li>
+
+            {user != 'notLogged' ? <a href='/create'><span className='name'>Create Club</span> 📣</a> : ''}
+               
+            </li>
+            <li>
                {user != 'notLogged' ? <a href='/profile#approvedClubs'><span className='name'>Approved Clubs</span> 🐉</a> : <a href='/register'><span className='name'>Register</span> 🍘</a> } 
             </li>
             <li>
