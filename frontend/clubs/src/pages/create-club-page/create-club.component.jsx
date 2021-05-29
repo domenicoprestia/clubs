@@ -62,17 +62,17 @@ const CreateClub = () => {
         <div className='create-club'>
             {token ? '' : <Redirect to='/'/>}
             <form onSubmit={handleSubmit}>
-            <h3 className='title'>Name</h3>
+            <h3 className='title'>Club's name</h3>
             <div className='input'>
                 <input type='text' className='createInput' id='name' placeholder='Name...' onChange={handleName} required></input>
                 <p className='error' id='errorName'></p>
             </div>
-            <h3 className='title'>Email</h3>
+            <h3 className='title'>Club's topic</h3>
             <div className='input'>
                 <input type='text' className='createInput' id='topic' placeholder='Topic...' onChange={handleTopic} required></input>
                 <p  className='error' id='errorTopic'></p>
             </div>
-            <h3 className='title'>Password</h3>
+            <h3 className='title'>Club's question</h3>
             <div className='input'>
                 <input type='text' className='createInput' id='question' placeholder='Question...' onChange={handleQuestion} required></input>
                 <p  className='error' id='errorQuestion'></p>
